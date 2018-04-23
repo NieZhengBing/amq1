@@ -15,10 +15,16 @@ import org.apache.activemq.ActiveMQConnectionFactory;
 public class QueueReceiver {
 	
 	public static void main(String... args) throws JMSException, InterruptedException {
-		ConnectionFactory connectionFactory = new ActiveMQConnectionFactory("tcp://172.27.10.140:61676");
+		// ConnectionFactory connectionFactory = new
+		// ActiveMQConnectionFactory("tcp://172.27.10.140:61676");
 		// ConnectionFactory connectionFactory = new
 		// ActiveMQConnectionFactory("nio://172.27.10.140:61686");
 		
+		// ConnectionFactory connectionFactory = new
+		// ActiveMQConnectionFactory("tcp://172.27.10.140:61776");
+
+		ConnectionFactory connectionFactory = new ActiveMQConnectionFactory("tcp://172.27.10.140:61676");
+
 		Connection connection = connectionFactory.createConnection();
 		
 		connection.start();
@@ -31,7 +37,7 @@ public class QueueReceiver {
 		
 //		final Session session = connection.createSession(true, Session.AUTO_ACKNOWLEDGE);
 		final Session session = connection.createSession(false, Session.CLIENT_ACKNOWLEDGE);
-		Destination destination = session.createQueue("queue1");
+		Destination destination = session.createQueue("queue_test222");
 		MessageConsumer consumer = session.createConsumer(destination);
 		int i = 0;
 		
@@ -41,7 +47,7 @@ public class QueueReceiver {
 //			TextMessage message = (TextMessage) consumer.receive();
 			MapMessage msg = (MapMessage) consumer.receive();	
 			
-			System.out.println("收到的消息是: " + msg.getString("my message-------111" + i) + ", property is "
+			System.out.println("收到的消息是: " + msg.getString("my message-------222" + i) + ", property is "
 					+ msg.getStringProperty("extra---" + i));
 //			session.commit();
 			if (i == 9) {
