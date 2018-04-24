@@ -87,7 +87,7 @@ class MyThread1 extends Thread {
 			// final Session session = connection.createSession(true,
 			// Session.AUTO_ACKNOWLEDGE);
 			final Session session = connection.createSession(true, Session.AUTO_ACKNOWLEDGE);
-			Destination destination = session.createQueue("queue_test222");
+			Destination destination = session.createQueue("my-queue2");
 			MessageConsumer consumer = session.createConsumer(destination);
 
 			consumer.setMessageListener(new MessageListener() {

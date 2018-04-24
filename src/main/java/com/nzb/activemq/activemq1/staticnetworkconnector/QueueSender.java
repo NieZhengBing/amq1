@@ -14,22 +14,25 @@ public class QueueSender {
 	public static void main(String... args) throws JMSException, InterruptedException {
 		// ConnectionFactory connectionFactory = new
 		// ActiveMQConnectionFactory("tcp://172.27.10.140:61676");
-		ConnectionFactory connectionFactory = new ActiveMQConnectionFactory("tcp://172.27.10.140:61776");
+		ConnectionFactory connectionFactory = new ActiveMQConnectionFactory("tcp://172.27.10.140:61676");
 		// ConnectionFactory connectionFactory = new
 		// ActiveMQConnectionFactory("nio://172.27.10.140:61686");
+
+		// ConnectionFactory connectionFactory = new ActiveMQConnectionFactory(
+		// "failover:(tcp://172.27.10.140:61676,tcp://172.27.10.140:61776)?randomize=false");
 
 		Connection connection = connectionFactory.createConnection();
 
 		connection.start();
 
 		// Session session = connection.createSession(true, Session.AUTO_ACKNOWLEDGE);
-		Session session = connection.createSession(true, Session.CLIENT_ACKNOWLEDGE);
-		Destination destination = session.createQueue("queue_test222");
+		Session session = connection.createSession(true, Session.AUTO_ACKNOWLEDGE);
+		Destination destination = session.createQueue("MY.QUEUE");
 		MessageProducer producer = session.createProducer(destination);
 		// TemporaryQueue tq = session.createTemporaryQueue();
 
-		for (int i = 0; i < 30; i++) {
-			TextMessage msg = session.createTextMessage("my first message_" + i);
+		for (int i = 0; i < 3; i++) {
+			TextMessage msg = session.createTextMessage("nzb message_" + i);
 			// MapMessage msg = session.createMapMessage();
 
 			// msg.setJMSReplyTo(tq);

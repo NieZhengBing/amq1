@@ -26,7 +26,7 @@ public class QueueReceiver1 {
 
 		ConnectionFactory connectionFactory = new ActiveMQConnectionFactory("tcp://172.27.10.140:61676");
 
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < 150; i++) {
 			new MyThread(connectionFactory).start();
 			Thread.sleep(1000L);
 		}
@@ -86,7 +86,7 @@ class MyThread extends Thread {
 			// final Session session = connection.createSession(true,
 			// Session.AUTO_ACKNOWLEDGE);
 			final Session session = connection.createSession(true, Session.AUTO_ACKNOWLEDGE);
-			Destination destination = session.createQueue("queue_test222");
+			Destination destination = session.createQueue("queue_test31");
 			MessageConsumer consumer = session.createConsumer(destination);
 
 			consumer.setMessageListener(new MessageListener() {
